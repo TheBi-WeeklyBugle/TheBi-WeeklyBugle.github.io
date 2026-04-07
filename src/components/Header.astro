@@ -8,9 +8,10 @@ import HeaderLink from './HeaderLink.astro';
     const active = document.querySelector('.internal-links a.active') as HTMLElement;
     if (!nav || !active) return;
 
-    const navCenter = nav.offsetWidth / 2;
+    const navCenter = nav.parentElement!.offsetWidth / 2;
     const linkCenter = active.offsetLeft + active.offsetWidth / 2;
-    nav.scrollLeft = linkCenter - navCenter;
+    const offset = navCenter - linkCenter;
+    nav.style.transform = `translateX(${offset}px)`;
   }
 
   centerActiveLink();
@@ -87,10 +88,7 @@ import HeaderLink from './HeaderLink.astro';
 		}
 	}
 	.internal-links {
-  		position: absolute;
-		left: 50%;
-  		transform: translateX(-50%);
   		display: flex;
-		overflow: hidden;
+		transition: transform 0.3s ease;
 	}
 </style>
