@@ -2,7 +2,19 @@
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
+<script>
+  function centerActiveLink() {
+    const nav = document.querySelector('.internal-links') as HTMLElement;
+    const active = document.querySelector('.internal-links a.active') as HTMLElement;
+    if (!nav || !active) return;
 
+    const navCenter = nav.offsetWidth / 2;
+    const linkCenter = active.offsetLeft + active.offsetWidth / 2;
+    nav.scrollLeft = linkCenter - navCenter;
+  }
+
+  centerActiveLink();
+</script>
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
@@ -79,5 +91,6 @@ import HeaderLink from './HeaderLink.astro';
 		left: 50%;
   		transform: translateX(-50%);
   		display: flex;
+		overflow: hidden;
 	}
 </style>
