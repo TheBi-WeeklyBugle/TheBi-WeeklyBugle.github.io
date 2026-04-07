@@ -11,7 +11,10 @@ import HeaderLink from './HeaderLink.astro';
     const navCenter = nav.parentElement!.offsetWidth / 2;
     const linkCenter = active.offsetLeft + active.offsetWidth / 2;
     const offset = navCenter - linkCenter;
-    nav.style.transform = `translateX(${offset}px)`;
+
+    setTimeout(() => {
+      nav.style.transform = `translateX(${offset}px)`;
+    }, 10);
   }
 
   centerActiveLink();
