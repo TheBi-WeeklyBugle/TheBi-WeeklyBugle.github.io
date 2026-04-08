@@ -12,11 +12,26 @@ import HeaderLink from './HeaderLink.astro';
     const linkCenter = active.offsetLeft + active.offsetWidth / 2;
     const offset = navCenter - linkCenter;
 
-    setTimeout(() => {
-      nav.style.transform = `translateX(${offset}px)`;
-    }, 10);
+    nav.style.transition = 'none';
+    nav.style.transform = `translateX(${offset}px)`;
   }
+
   centerActiveLink();
+  document.addEventListener('astro:after-swap', centerActiveLink);
+
+  document.querySelectorAll('.internal-links a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const nav = document.querySelector('.internal-links') as HTMLElement;
+      const clicked = e.currentTarget as HTMLElement;
+
+      const navCenter = nav.parentElement!.offsetWidth / 2;
+      const linkCenter = clicked.offsetLeft + clicked.offsetWidth / 2;
+      const offset = navCenter - linkCenter;
+
+      nav.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      nav.style.transform = `translateX(${offset}px)`;
+    });
+  });
 </script>
 <header>
 	<nav>
@@ -90,15 +105,15 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	.internal-links {
   		display: flex;
-		transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	}
 	@media (max-width: 720px) {
   		nav {
-  		  flex-direction: column;
-   		 align-items: center;
-   		 padding: 0.5em 0;
+  			flex-direction: column;
+   			align-items: center;
+   			padding: 0.5em 0;
   	}
+	}	
 }
-  	}
 }
 </style>
