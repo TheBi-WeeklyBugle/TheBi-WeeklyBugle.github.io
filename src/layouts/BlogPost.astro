@@ -19,23 +19,34 @@ const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-
       }
       .hero-image {
         width: 100%;
-        position: relative;
-        overflow: hidden;
-      }
-      .slideshow {
-        display: flex;
-        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .slideshow img {
-        min-width: 100%;
-        display: block;
+        max-width: 1020px;
         margin: 0 auto;
+        overflow: hidden;
         border-radius: 12px;
         box-shadow: var(--box-shadow);
       }
+      .slideshow-wrapper {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        border-radius: 12px;
+      }
+      .slideshow {
+        display: flex;
+        width: 100%;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .slideshow img {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        height: auto;
+        object-fit: contain;
+      }
       .slide-controls {
         position: absolute;
-        bottom: 1rem;
+        bottom: 0.75rem;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
@@ -80,7 +91,7 @@ const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-
       <article>
         <div class="hero-image">
           {heroImage && heroImage.length > 0 && (
-            <div style="position: relative; overflow: hidden;">
+            <div class="slideshow-wrapper">
               <div class="slideshow" id="slideshow">
                 {heroImage.map((img: string) => (
                   <img src={img} alt={title} />
@@ -118,29 +129,33 @@ const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-
 </html>
 
 <script>
-  function initSlideshow() {
-    const slideshow = document.getElementById('slideshow') as HTMLElement;
+  // @ts-nocheck
+  document.addEventListener('astro:page-load', function() {
+    const slideshow = document.getElementById('slideshow');
     const controls = document.getElementById('slide-controls');
-    if (!slideshow) return;
+    if (!slideshow || !controls) return;
 
-    const dots = controls?.querySelectorAll('.slide-dot');
+    const dots = controls.querySelectorAll('.slide-dot');
+    if (!dots.length) return;
+
     let index = 0;
+    let timer;
 
-    function goTo(i: number) {
+    function goTo(i) {
       index = i;
-      slideshow.style.transform = `translateX(-${index * 100}%)`;
-      dots?.forEach((d, j) => d.classList.toggle('active', i === j));
+      slideshow.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach(function(d, j) { d.classList.toggle('active', i === j); });
     }
 
-    dots?.forEach((dot, i) => {
-      dot.addEventListener('click', () => goTo(i));
+    function goNext() { goTo((index + 1) % dots.length); }
+
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() { goTo(i); });
     });
 
-    if (dots && dots.length > 1) {
-      setInterval(() => goTo((index + 1) % dots.length), 4000);
-    }
-  }
+    timer = setInterval(goNext, 4000);
 
-  initSlideshow();
-  document.addEventListener('astro:page-load', initSlideshow);
+    slideshow.addEventListener('mouseenter', function() { clearInterval(timer); });
+    slideshow.addEventListener('mouseleave', function() { timer = setInterval(goNext, 4000); });
+  });
 </script>
