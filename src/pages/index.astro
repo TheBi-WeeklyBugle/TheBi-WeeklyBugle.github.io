@@ -4,7 +4,6 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
-
 const posts = (await getCollection('blog', ({ data }) => {
   return data.draft !== true;
 })).sort(
@@ -14,42 +13,209 @@ const posts = (await getCollection('blog', ({ data }) => {
 <!doctype html>
 <html lang="en">
   <head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<label>Editor's Note
-			<h1>🕊️ Welcome to the best blog on the internet.</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+		<h3>Welcome to</h4>
+    	<h1>The Bi-Weekly Bugle</h1>
+		
+		<label>Editor's Note</label>
+		<p>Home to the best blog on the internet.</p>
+		<div class="carousel-section">
+        <div class="carousel-header">
+          <span class="carousel-label">Recent Posts</span>
+          <div class="carousel-controls">
+            <button id="prev" aria-label="Previous">&#8592;</button>
+            <button id="next" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+        <div class="carousel-track-wrapper">
+          <div class="carousel-track" id="carousel-track">
+            {posts.map((post) => {
+              return (
+                <a href={`/blog/${post.id}/`} class="carousel-card">
+                  {post.data.heroImage ? <img src={post.data.heroImage.src} alt={post.data.title} /> : null}
+                  <div class="carousel-card-body">
+                    <p class="carousel-title">{post.data.title}</p>
+                    <p class="carousel-desc">{post.data.description}</p>
+                    <p class="carousel-date">
+                      {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <label>Where to Start</label>
+      <p>
+        If you're still not sold, skim the about me—that should give you a feel of how I write.
+        Need a recommendation? Check out "On Free Will;" it's a bit of a lengthy read, but I'm
+        pretty proud of the way it turned out.
+      </p>
+
+      <label>Organizational & Administrative Stuff</label>
+      <p>
+        All dates are representative of when the piece was first finalized, not when they were
+        published. The Bi-Weekly Bugle is not responsible in the event that the quality of writing
+        significantly declines with older works.
+      </p>
+
+      <h5>Thanks for reading</h5>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  function initCarousel() {
+    const track = document.getElementById('carousel-track') as HTMLElement;
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    if (!track) return;
+    let index = 0;
+
+    function getVisible() {
+      return 1;
+    }
+
+    function getMax() {
+      return track.querySelectorAll('.carousel-card').length - getVisible();
+    }
+
+    function update() {
+      const card = track?.querySelector('.carousel-card') as HTMLElement;
+      if (!card) return;
+      const width = card.offsetWidth + 16;
+      track.style.transform = `translateX(-${index * width}px)`;
+    }
+
+    function goNext() {
+      index = index >= getMax() ? 0 : index + 1;
+      update();
+    }
+
+    function goPrev() {
+      index = index <= 0 ? getMax() : index - 1;
+      update();
+    }
+
+    prev?.addEventListener('click', goPrev);
+    next?.addEventListener('click', goNext);
+    window.addEventListener('resize', update);
+
+    let timer = setInterval(goNext, 4000);
+
+    track?.addEventListener('mouseenter', () => clearInterval(timer));
+    track?.addEventListener('mouseleave', () => {
+      timer = setInterval(goNext, 4000);
+    });
+  }
+
+  initCarousel();
+  document.addEventListener('astro:page-load', initCarousel);
+</script>
+
+<style>
+  label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(var(--gray));
+    margin: 1.5rem 0 0.25rem;
+  }
+  .carousel-section {
+    margin-top: 3rem;
+  }
+  .carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .carousel-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(var(--gray));
+  }
+  .carousel-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .carousel-controls button {
+    background: none;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 6px;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: rgb(var(--gray-dark));
+  }
+  .carousel-controls button:hover {
+    border-color: rgb(var(--gray));
+  }
+  .carousel-track-wrapper {
+    overflow: hidden;
+  }
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .carousel-card {
+  	min-width: 100%;
+    border: 0.5px solid rgb(var(--gray-light));
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+	.carousel-card:hover .carousel-title,
+	.carousel-card:hover .carousel-date,
+	.carousel-card:hover .carousel-desc {
+  color: rgb(var(--accent));
+}
+.carousel-card:hover img {
+  box-shadow: var(--box-shadow);
+}
+  .carousel-card img {
+  	width: 100%;
+  	height: auto;
+  	object-fit: contain;
+  	border-radius: 0;
+  	margin: 0;
+}
+  .carousel-card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .carousel-title {
+    font-weight: 700;
+    margin: 0;
+    font-size: 1em;
+  }
+  .carousel-desc {
+    font-size: 0.85em;
+    color: rgb(var(--gray));
+    margin: 0;
+  }
+  .carousel-date {
+    font-size: 0.75em;
+    color: rgb(var(--gray));
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .carousel-card {
+      min-width: 100%;
+    }
+  }
+</style>
