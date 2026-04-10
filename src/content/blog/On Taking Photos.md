@@ -1,6 +1,6 @@
 ---
 title: 'On Taking Photos'
-description: 'Taking photos is stupid'
+description: 'photos are stupid'
 pubDate: 'Apr 07 2026'
 heroImage: '../../assets/Half_Mask_Stone.jpg'
 ---
