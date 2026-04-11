@@ -3,42 +3,14 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
-<script>
-  function getOffset(el: HTMLElement, parent: HTMLElement) {
-    return parent.offsetWidth / 2 - (el.offsetLeft + el.offsetWidth / 2);
-  }
-
-  function centerActiveLink() {
-    const nav = document.querySelector('.internal-links') as HTMLElement;
-    const active = document.querySelector('.internal-links a.active') as HTMLElement;
-    if (!nav || !active) return;
-    nav.style.transition = 'none';
-    nav.style.transform = `translateX(${getOffset(active, nav.parentElement!)}px)`;
-  }
-
-  function initHeader() {
-    centerActiveLink();
-    document.querySelectorAll('.internal-links a').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const nav = document.querySelector('.internal-links') as HTMLElement;
-        const clicked = e.currentTarget as HTMLElement;
-        nav.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        nav.style.transform = `translateX(${getOffset(clicked, nav.parentElement!)}px)`;
-      });
-    });
-  }
-
-  initHeader();
-  document.addEventListener('astro:after-swap', initHeader);
-</script>
-
 <header>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div class="internal-links">
+    <div class="nav-links" id="nav-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
+      <div class="underline" id="underline"></div>
     </div>
     <div class="social-links">
       <a href="https://x.com/StanleyCheww" target="_blank">
@@ -56,6 +28,53 @@ import HeaderLink from './HeaderLink.astro';
     </div>
   </nav>
 </header>
+
+<script>
+  function getCenterOffset(link: HTMLElement, nav: HTMLElement): number {
+    const header = nav.closest('nav') as HTMLElement;
+    const headerMid = header.offsetWidth / 2;
+    const linkMid = link.offsetLeft + link.offsetWidth / 2;
+    return headerMid - (nav.offsetLeft + linkMid);
+  }
+
+  function positionUnderline(link: HTMLElement, nav: HTMLElement) {
+    const bar = document.getElementById('underline') as HTMLElement;
+    if (!bar) return;
+    bar.style.left = link.offsetLeft + 'px';
+    bar.style.width = link.offsetWidth + 'px';
+  }
+
+  function initHeader() {
+    const nav = document.getElementById('nav-links') as HTMLElement;
+    const active = document.querySelector('#nav-links a.active') as HTMLElement;
+    if (!nav || !active) return;
+
+    // Snap everything instantly on load
+    nav.style.transition = 'none';
+    nav.style.transform = `translateX(${getCenterOffset(active, nav)}px)`;
+    positionUnderline(active, nav);
+
+    // Re-enable animation after layout settles
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        nav.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+        const bar = document.getElementById('underline') as HTMLElement;
+        if (bar) bar.style.transition = 'left 0.45s cubic-bezier(0.16, 1, 0.3, 1), width 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+      });
+    });
+
+    document.querySelectorAll('#nav-links a').forEach((link) => {
+      link.addEventListener('click', () => {
+        const el = link as HTMLElement;
+        nav.style.transform = `translateX(${getCenterOffset(el, nav)}px)`;
+        positionUnderline(el, nav);
+      });
+    });
+  }
+
+  initHeader();
+  document.addEventListener('astro:after-swap', initHeader);
+</script>
 
 <style>
   header {
@@ -81,15 +100,20 @@ import HeaderLink from './HeaderLink.astro';
   nav a {
     padding: 1em 0.5em;
     color: var(--black);
-    border-bottom: 4px solid transparent;
     text-decoration: none;
   }
-  nav a.active {
-    border-bottom-color: var(--accent);
-  }
-  .internal-links {
+  .nav-links {
     display: flex;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    will-change: transform;
+  }
+  .underline {
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    background-color: var(--accent);
+    border-radius: 2px 2px 0 0;
+    pointer-events: none;
   }
   .social-links,
   .social-links a {
