@@ -58,9 +58,9 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
       <label>Organizational & Administrative Stuff</label>
       <p>
-        All dates are representative of when the piece was first finalized, not when they were
-        published. The Bi-Weekly Bugle is not responsible in the event that the quality of writing
-        significantly declines with older works.
+        All works are dated as of the date of finalization rather than the date of publication.
+		The Bi-Weekly Bugle hereby disclaims all liability for any perceived deterioration in
+		literary quality attributable to the age of the work in question.
       </p>
 
       <h5>Thanks for reading</h5>
@@ -116,7 +116,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     color: rgb(var(--gray));
     margin: 1.5rem 0 0.25rem;
   }
-  .carousel-section { margin-top: 3rem; }
+  .carousel-section { margin-top: 1.5rem; }
   .carousel-header {
     display: flex;
     justify-content: space-between;
