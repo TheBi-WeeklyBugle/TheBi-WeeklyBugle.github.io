@@ -3,13 +3,11 @@ title: 'On Minecraft'
 description: 'minecraft will never be the same'
 pubDate: 'Dec 31 2024'
 heroImage:
-    - /images/on_minecraft/MC1.jpg
     - /images/on_minecraft/MC2.jpg
-    - /images/on_minecraft/MC3.jpg
-    - /images/on_minecraft/MC4.jpg
     - /images/on_minecraft/MC6.jpg
     - /images/on_minecraft/MC7.jpg
----
+    - /images/on_minecraft/MC1.jpg
+--- 
 
 Minecraft has yet to engross me in the same way it did all those years ago. This phenomenon is nothing new; there are plenty of videos on YouTube dissecting Minecraft’s failures at living up to the nostalgia, but I had the chance to grow up alongside the game; I’m not another 20-something-year-old reminiscing about the “good old days.” Besides, this isn’t a video on how to fix Minecraft or why old Minecraft was better; it’s one critiquing the very way in which we understand it. Specifically, why Minecraft was never fun.
 
