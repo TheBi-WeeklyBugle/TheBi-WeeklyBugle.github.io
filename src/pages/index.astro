@@ -94,8 +94,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
     function startTimer() { timer = setInterval(goNext, 4000); }
     function stopTimer() { clearInterval(timer); }
 
-    prev?.addEventListener('click', goPrev);
-    next?.addEventListener('click', goNext);
+    prev?.addEventListener('click', () => { goPrev(); stopTimer(); startTimer(); });
+    next?.addEventListener('click', () => { goNext(); stopTimer(); startTimer(); });
     track.addEventListener('mouseenter', stopTimer);
     track.addEventListener('mouseleave', startTimer);
     window.addEventListener('resize', update);
