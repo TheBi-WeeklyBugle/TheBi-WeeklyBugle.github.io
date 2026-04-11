@@ -1,7 +1,7 @@
 ---
 title: 'On Taking Photos'
 description: 'photos are stupid'
-pubDate: 'Apr 07 2026'
+pubDate: 'Apr 10 2026'
 heroImage:
   - /images/on_taking_photos/Half_Mask_Stone.jpg
   - /images/on_taking_photos/ZNP1.jpg
