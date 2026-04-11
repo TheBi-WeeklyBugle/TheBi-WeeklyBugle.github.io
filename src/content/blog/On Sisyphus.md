@@ -1,9 +1,9 @@
 ---
-title: 'On Free Will'
-description: 'an exploration of fate'
-pubDate: 'Jan 13 2025'
+title: 'On Sisyphus'
+description: 'the love of the grind'
+pubDate: 'March 30 2024'
 heroImage: 
-    - /images/Ice_Cream.jpg
+    - /images/blog-placeholder-1.jpg
 ---
 
 2+2=4. It’s an incredibly simple statement, almost deceivingly so, but the equation highlights a key aspect of our universe: that absolutes exist. Regardless of the divisor applied, the sum of all quotients will always equal 4. Extrapolate that logic onto the entirety of our universe and you’ll arrive at a pretty uncontroversial claim: a group of definite factors will result in a definite solution. Our understanding of human free will directly contradicts it; most people tend to believe that we, as a species, have the power to create our own outcomes—almost like saying 2+x=y. Whichever philosophical outlook you have, deterministic or libertarian, we can’t simply prove, with the technology we currently have, what that x factor is or whether it even exists. With recent advancements in the various fields of science—quantum mechanics, theoretical physics, and neurology to name a few—we've begun to challenge the long-standing notions surrounding the existence of free will and, ultimately, the nature of the universe itself. Although we've come decently far in reaching a consensus, almost everything results in a one-word answer: maybe. So, the answer to the question presented—whether science, an ever-evolving understanding of the universe, can prove the existence of free will—is no, it doesn’t, but it also doesn’t prove anything.
@@ -19,7 +19,5 @@ If the incest thing didn’t get me into enough trouble, this will; we’re talk
 When it comes down to it, it’s hard for even me to say that science can determine that things like love are calculable because there’s something so mystical about the phenomena. It’s such a cruel outlook that we’re merely slaves to past circumstances, but does it even matter? Regardless of whether free will even exists, you’ve lived your whole life up to this point perfectly content; does the existence of free will really matter? Whether we can even answer the question is still up in the air; even science still can’t prove either side. The whole inspiration for this piece came from that NYT article about the uncertainty of the universe and that nothing should be taken for granted, and that’s really the point I’ve been trying to make. Something we intuitively believe in, the ability to freely make choices, is so fragile under scrutiny. Maybe the gut feeling of all these people hold weight;feelings the crowds are known to be wise, but it’ll remain a gut feeling until further scientific proof arrives. But maybe, just maybe, we are but slaves.
 
 “Man can do what he wills, but he cannot will what he wills” - Schopenhauer. 
-
---
 
 _Content was edited for grammar; originally an essay for class._

@@ -21,4 +21,6 @@ Look, no matter how you slice it, we’ve outgrown Minecraft. It was never the g
 
 Hi, this is Outro Stanley, and I just wanted to talk about my favorite part of making this video. YJ and I were sharing memories of our experiences with Minecraft, and his just cracked me up; I thought it was worth sharing. The libraries in our area will time you out if all computers are occupied and someone requests one; there’s no way of getting around the software. Or so I thought. Apparently, according to YJ, resetting the computer and mashing the space bar would let you re-login, effectively cancelling out the reservation. Is it an absolute dick move? Yes. But is it hilarious that he used it to play Minecraft on their computers? Absolutely. Anyways, pirated MC was a blessing to all us kids; shoutout to all the crackers that made it happen. Also, if the angry British pig guy sees this, it’s not that deep bro. Don’t take it personally. Ok, bye!
 
-_Content was edited for grammar; originally an essay for youtube._
+--
+
+_Content was edited for grammar; originally an unfinished essay for youtube._

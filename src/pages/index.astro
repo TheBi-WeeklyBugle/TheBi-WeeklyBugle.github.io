@@ -17,7 +17,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   <body>
     <Header />
     <main>
-      <h3>Welcome to</h3>
+      <h2>Welcome to</h2>
       <h1>The Bi-Weekly Bugle</h1>
 
       <label>Editor's Note</label>
@@ -53,7 +53,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <p>
         If you're still not sold, skim the about me—that should give you a feel of how I write.
         Need a recommendation? Check out "On Free Will;" it's a bit of a lengthy read, but I'm
-        pretty proud of the way it turned out.
+        pretty proud of the way it turned out. As long as you trend towards the more recent works,
+		though, you should be fine.
       </p>
 
       <label>Organizational & Administrative Stuff</label>
@@ -62,8 +63,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 		The Bi-Weekly Bugle hereby disclaims all liability for any perceived deterioration in
 		literary quality attributable to the age of the work in question.
       </p>
-
-      <h5>Thanks for reading</h5>
     </main>
     <Footer />
   </body>
