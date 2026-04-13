@@ -1,5 +1,5 @@
 ---
-title: 'On Tailor Swift'
+title: 'On Taylor Swift'
 description: 'dumpster fire incarnate'
 pubDate: 'Apr 13 2024'
 heroImage: 
