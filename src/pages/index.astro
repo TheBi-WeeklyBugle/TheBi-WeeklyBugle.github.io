@@ -1,0 +1,184 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h2>Welcome to</h2>
+      <h1>The Bi-Weekly Bugle</h1>
+
+      <label>🎵 Editor's Note</label>
+      <p>Home to the best blog on the internet.</p>
+
+      <div class="carousel-section">
+        <div class="carousel-header">
+          <span class="carousel-label">⏱️ Recent Posts</span>
+          <div class="carousel-controls">
+            <button id="prev" aria-label="Previous">&#8592;</button>
+            <button id="next" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+        <div class="carousel-track-wrapper">
+          <div class="carousel-track" id="carousel-track">
+            {posts.map((post) => (
+              <a href={`/blog/${post.id}/`} class="carousel-card">
+                {post.data.heroImage && post.data.heroImage.length > 0 && <img src={post.data.heroImage[0]} alt={post.data.title} />}
+                <div class="carousel-card-body">
+                  <p class="carousel-title">{post.data.title}</p>
+                  <p class="carousel-desc">{post.data.description}</p>
+                  <p class="carousel-date">
+                    {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <label>🏁 Where to Start</label>
+      <p>
+        If you're still not sold, skim the about me—that should give you a feel of how I write.
+        Need a recommendation? Check out "On Free Will;" it's a bit of a lengthy read, but I'm
+        pretty proud of the way it turned out. As long as you trend towards the more recent works,
+		though, you should be fine.
+      </p>
+
+      <label>⚠️ Danger</label>
+      <p>
+        Posts under this category contain writing that fails to meet my standard of quality.
+		    "On Change" provides some helpful insight—proceed at your own discretion.
+      </p>
+
+	  <label>📚 Organizational & Administrative Stuff</label>
+      <p>
+        All works are dated as of the date of finalization rather than the date of publication.
+		The Bi-Weekly Bugle hereby disclaims all liability for any perceived deterioration in
+		literary quality attributable to the age of the work in question.
+      </p>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  function initCarousel() {
+    const track = document.getElementById('carousel-track') as HTMLElement;
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    if (!track) return;
+
+    let index = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    const cards = () => track.querySelectorAll('.carousel-card');
+    const getMax = () => cards().length - 1;
+
+    function update() {
+      const card = cards()[0] as HTMLElement;
+      if (!card) return;
+      track.style.transform = `translateX(-${index * (card.offsetWidth + 16)}px)`;
+    }
+
+    function goNext() { index = index >= getMax() ? 0 : index + 1; update(); }
+    function goPrev() { index = index <= 0 ? getMax() : index - 1; update(); }
+
+    function startTimer() { timer = setInterval(goNext, 4000); }
+    function stopTimer() { clearInterval(timer); }
+
+    prev?.addEventListener('click', () => { goPrev(); stopTimer(); startTimer(); });
+    next?.addEventListener('click', () => { goNext(); stopTimer(); startTimer(); });
+    track.addEventListener('mouseenter', stopTimer);
+    track.addEventListener('mouseleave', startTimer);
+    window.addEventListener('resize', update);
+
+    startTimer();
+  }
+
+  initCarousel();
+  document.addEventListener('astro:page-load', initCarousel);
+</script>
+
+<style>
+  label {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(var(--gray));
+    margin: 1.5rem 0 0.25rem;
+  }
+  .carousel-section { margin-top: 1.5rem; }
+  .carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .carousel-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgb(var(--gray));
+  }
+  .carousel-controls { display: flex; gap: 0.5rem; }
+  .carousel-controls button {
+    background: none;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 6px;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: rgb(var(--gray-dark));
+  }
+  .carousel-controls button:hover { border-color: rgb(var(--gray)); }
+  .carousel-track-wrapper { overflow: hidden; }
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .carousel-card {
+    min-width: 100%;
+    border: 0.5px solid rgb(var(--gray-light));
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .carousel-card:hover .carousel-title,
+  .carousel-card:hover .carousel-date,
+  .carousel-card:hover .carousel-desc { color: rgb(var(--accent)); }
+  .carousel-card:hover img { box-shadow: var(--box-shadow); }
+  .carousel-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+    margin: 0;
+  }
+  .carousel-card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .carousel-title { font-weight: 700; margin: 0; font-size: 1em; }
+  .carousel-desc { font-size: 0.85em; color: rgb(var(--gray)); margin: 0; }
+  .carousel-date { font-size: 0.75em; color: rgb(var(--gray)); margin: 0; }
+</style>

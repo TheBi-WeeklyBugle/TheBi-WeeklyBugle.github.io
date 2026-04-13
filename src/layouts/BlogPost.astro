@@ -1,0 +1,161 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'] & { tabTitle?: string };
+const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-Weekly Bugle" } = Astro.props as any;
+---
+<html lang="en">
+  <head>
+    <BaseHead title={tabTitle ?? title} description={description} />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .hero-image {
+        width: 100%;
+        max-width: 1020px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+      }
+      .slideshow-wrapper {
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+        border-radius: 12px;
+      }
+      .slideshow {
+        display: flex;
+        width: 100%;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .slideshow img {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        height: auto;
+        object-fit: contain;
+      }
+      .slide-controls {
+        position: absolute;
+        bottom: 0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.5rem;
+      }
+      .slide-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+      .slide-dot.active {
+        background: white;
+      }
+      .prose {
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        text-align: center;
+        line-height: 1;
+      }
+      .title h1 { margin: 0 0 0.5em 0; }
+      .date {
+        margin-bottom: 0.5em;
+        color: rgb(var(--gray));
+      }
+      .last-updated-on { font-style: italic; }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div class="hero-image">
+          {heroImage && heroImage.length > 0 && (
+            <div class="slideshow-wrapper">
+              <div class="slideshow" id="slideshow">
+                {heroImage.map((img: string) => (
+                  <img src={img} alt={title} />
+                ))}
+              </div>
+              {heroImage.length > 1 && (
+                <div class="slide-controls" id="slide-controls">
+                  {heroImage.map((_: string, i: number) => (
+                    <button class={`slide-dot${i === 0 ? ' active' : ''}`} data-index={String(i)} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <div class="prose">
+          <div class="title">
+            <div class="date">
+              <FormattedDate date={pubDate} />
+              {updatedDate && (
+                <div class="last-updated-on">
+                  Last updated on <FormattedDate date={updatedDate} />
+                </div>
+              )}
+            </div>
+            <h1>{title}</h1>
+            <hr />
+          </div>
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  // @ts-nocheck
+  document.addEventListener('astro:page-load', function() {
+    const slideshow = document.getElementById('slideshow');
+    const controls = document.getElementById('slide-controls');
+    if (!slideshow || !controls) return;
+
+    const dots = controls.querySelectorAll('.slide-dot');
+    if (!dots.length) return;
+
+    let index = 0;
+    let timer;
+
+    function goTo(i) {
+      index = i;
+      slideshow.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach(function(d, j) { d.classList.toggle('active', i === j); });
+    }
+
+    function goNext() { goTo((index + 1) % dots.length); }
+
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() { goTo(i); });
+    });
+
+    timer = setInterval(goNext, 4000);
+
+    slideshow.addEventListener('mouseenter', function() { clearInterval(timer); });
+    slideshow.addEventListener('mouseleave', function() { timer = setInterval(goNext, 4000); });
+  });
+</script>
