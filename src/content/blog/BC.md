@@ -1,5 +1,5 @@
 ---
-title: 'Boston College'
+title: 'BC'
 description: 'Waitlisted'
 pubDate: 'Jan 2 2026'
 heroImage: 
