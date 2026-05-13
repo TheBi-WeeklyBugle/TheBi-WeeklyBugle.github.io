@@ -21,7 +21,7 @@ Backgrounds anchor perspectives in place; some differences are irreconcilable. I
 
 ### Q3
 
-I’m not a music person, yet I own nearly every Taylor Swift album. When “The Life of a Showgirl” first came out, a friend and I listened through it together; over its 40-minute run time, he lodged nearly 40 complaints. He complained non-stop about the sound; I wouldn’t drop the storytelling. Taylor Swift, to me, is a writer; to my friend, the songs were art, the melodies themselves mediums in which stories are told.
+I’m not a music person, yet I own nearly every Taylor Swift album. When “The Life of a Showgirl” first came out, a friend and I listened through it together; over its 40-minute run time, he lodged nearly 40 complaints. He complained non-stop about the sound; I wouldn’t drop the storytelling. Taylor Swift, to me, is a writer; to my friend, the songs were art, the melodies themselves stories told.
 
 We stopped trying to convince one another. Instead, we took turns listening to it again: one track for the story, the next for the sound. Lost, I asked for directions. He showed me through his playlist, and I gave every artist a shot, learning to listen. Later, I talked him through the lyrics.
 
