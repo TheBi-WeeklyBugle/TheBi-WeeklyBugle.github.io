@@ -17,13 +17,15 @@ I've never gone to bed hungry. My parents barely had enough to survive as kids. 
 
 Every night, I feel like a stranger in my own home. The word “vegan” remains foreign; any attempt at an explanation has only resulted in dismissive, judgmental stares. Despite my best efforts, they won’t budge; meat is pushed onto the plate, eyes locked onto mine. To maintain the fragile stability, I oblige. Whenever they’re not looking, the meat goes back.
 
-Backgrounds anchor perspectives in place; some differences are irreconcilable. I’m willing to compromise; I’m willing to understand, but I won’t be silenced. At Columbia, I won’t be afraid to be loud. To challenge the status quo, to fight for those otherwise unheard—that is what I bring.
+Backgrounds anchor perspectives in place; some differences are irreconcilable. I’m willing to compromise, I’m willing to understand, but I won’t be silenced. At Columbia, I won’t be afraid to be loud. To challenge the status quo, to fight for those otherwise unheard—that is what I bring.
 
 ### Q3
 
-I’m not a music person, yet I own nearly every Taylor Swift album. To me she’s a writer; I’ve never seen her as a musician. The music was a mere distraction, white noise in the background; to my friend, the songs were art, the sounds themselves mediums in which stories are told. I didn’t know the first thing about music.
+I’m not a music person, yet I own nearly every Taylor Swift album. When “The Life of a Showgirl” first came out, a friend and I listened through it together; over its 40-minute run time, he lodged nearly 40 complaints. He complained non-stop about the sound; I wouldn’t drop the storytelling. Taylor Swift, to me, is a writer; to my friend, the songs were art, the melodies themselves mediums in which stories are told.
 
-Realizing I was lost, I asked for directions. I gave every artist on his playlist a shot, from Keshi to King Von, learning to listen. I still can’t remember what R&B stands for (or why they’re called Blues), but I’m ever closer to understanding, to finally “getting it.” People can hum the same tune yet be ever so slightly offbeat. That day, Taylor Swift showed me more than what it means to be a “Showgirl”; she taught me to say “Tell Me Why.”
+We stopped trying to convince one another. Instead, we took turns listening to it again: one track for the story, the next for the sound. Lost, I asked for directions. He showed me through his playlist, and I gave every artist a shot, learning to listen. Later, I talked him through the lyrics.
+
+Neither of our opinions changed, yet our disagreement resolved. Engagement isn’t about winning; it’s about learning how someone hears the world.
 
 ### Q4
 
