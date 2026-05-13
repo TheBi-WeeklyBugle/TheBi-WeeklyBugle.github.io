@@ -1,7 +1,7 @@
 ---
 title: 'Columbia'
 description: 'Rejected'
-pubDate: 'Dec 31 2025'
+pubDate: 'Jan 1 2026'
 heroImage: 
     - /images/Columbia.jpg
 category: "How NOT to Write Your College Essays"

@@ -8,9 +8,11 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog', ({ data }) => {
   return data.draft !== true;
-})).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+})).sort((a, b) => {
+const dateDiff = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  if (dateDiff !== 0) return dateDiff;
+  return b.data.title.localeCompare(a.data.title);
+});
 
 const general = posts.filter(p => p.data.category === 'General');
 const danger = posts.filter(p => p.data.category === 'Danger');
