@@ -5,13 +5,15 @@ import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 
+const EXCLUDED_CATEGORIES = ['Danger', 'How NOT to Write Your College Essays'];
+
 const posts = (await getCollection('blog', ({ data }) => {
-  return data.draft !== true;
+  return data.draft !== true && !EXCLUDED_CATEGORIES.includes(data.category ?? '');
 })).sort((a, b) => {
 const dateDiff = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
   if (dateDiff !== 0) return dateDiff;
   return b.data.title.localeCompare(a.data.title);
-}).slice(0, 3);
+}). slice(0, 3);
 ---
 <!doctype html>
 <html lang="en">

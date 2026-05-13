@@ -1,5 +1,5 @@
 ---
-title: 'On Taking Photos'
+title: 'On Photos'
 description: 'photos are stupid'
 pubDate: 'Apr 10 2026'
 heroImage:
