@@ -53,4 +53,4 @@ Columbia’s Philosophy & Economics offers an approach seldom found elsewhere, a
 
 --
 
-_Content was edited for formatting; originally ollege essays._
+_Content was edited for formatting; originally college essays._
