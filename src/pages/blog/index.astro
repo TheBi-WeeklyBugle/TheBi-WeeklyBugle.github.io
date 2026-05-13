@@ -15,6 +15,7 @@ const posts = (await getCollection('blog', ({ data }) => {
 const general = posts.filter(p => p.data.category === 'General');
 const danger = posts.filter(p => p.data.category === 'Danger');
 const justALittleMore = posts.filter(p => p.data.category === 'Just a Little More');
+const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'How NOT to Write Your College Essays');
 ---
 <!doctype html>
 <html lang="en">
@@ -101,7 +102,22 @@ const justALittleMore = posts.filter(p => p.data.category === 'Just a Little Mor
           ))}
         </ul>
 
-		<h2 class="category-head">⚠️ Danger</h2>
+        <h2 class="category-head">💣 How NOT to Write Your College Essays</h2>
+        <ul>
+          {howNOTToWriteYourCollegeEssays.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>
+                {post.data.heroImage && post.data.heroImage.length > 0 && (
+                  <img width={720} height={360} src={post.data.heroImage[0]} alt="" />
+                )}
+                <h4 class="title">{post.data.title}</h4>
+                <p class="date"><FormattedDate date={post.data.pubDate} /></p>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+		    <h2 class="category-head">⚠️ Danger</h2>
         <ul>
           {danger.map((post) => (
             <li>

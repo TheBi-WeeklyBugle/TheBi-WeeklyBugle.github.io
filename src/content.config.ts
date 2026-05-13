@@ -15,7 +15,7 @@ const blog = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.array(z.string()).optional(),
 			draft: z.boolean().optional(),
-			category: z.enum(['General', 'Danger', 'Just a Little More']).optional(),
+			category: z.enum(['General', 'Danger', 'Just a Little More', 'How NOT to Write Your College Essays']).optional(),
 		}),
 });
 
