@@ -1,0 +1,26 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main style="width: 100%; max-width: 100%; margin: 0; padding: 0;">
+      <div style="width: 960px; max-width: calc(100% - 2em); margin: 0 auto; padding: 3em 1em;">
+        <iframe
+          width="100%"
+          style="aspect-ratio: 16/9; border-radius: 12px; border: none;"
+          src="https://www.youtube.com/embed/eFVpJnwxWYk"
+          allowfullscreen
+        />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      .film-page-poster img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+}
+      .film-page-poster:hover img {
+        box-shadow: var(--box-shadow);
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main style="width: 100%; max-width: 100%; margin: 0; padding: 0;">
+      <div style="width: 960px; max-width: calc(100% - 2em); margin: 0 auto; padding: 3em 1em;">
+        <a href="/film/watch" class="film-page-poster" style="display: block; width: 100%; max-width: 680px; margin: 0 auto;">
+          <img src="/images/WCDPoster.png" alt="Film" />
+        </a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

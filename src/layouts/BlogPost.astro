@@ -12,12 +12,7 @@ const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-
   <head>
     <BaseHead title={tabTitle ?? title} description={description} />
     <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
-      .hero-image {
+      .blog-hero-image {
         width: 100%;
         max-width: 1020px;
         margin: 0 auto;
@@ -61,9 +56,7 @@ const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-
         cursor: pointer;
         padding: 0;
       }
-      .slide-dot.active {
-        background: white;
-      }
+      .slide-dot.active { background: white; }
       .prose {
         width: 720px;
         max-width: calc(100% - 2em);
@@ -87,9 +80,9 @@ const { title, description, pubDate, updatedDate, heroImage, tabTitle = "The Bi-
   </head>
   <body>
     <Header />
-    <main>
+    <main style="width: 100%; max-width: 100%; margin: 0; padding: 3em 0;">
       <article>
-        <div class="hero-image">
+        <div class="blog-hero-image">
           {heroImage && heroImage.length > 0 && (
             <div class="slideshow-wrapper">
               <div class="slideshow" id="slideshow">

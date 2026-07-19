@@ -16,7 +16,7 @@ const dateDiff = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 
 const general = posts.filter(p => p.data.category === 'General');
 const danger = posts.filter(p => p.data.category === 'Danger');
-const justALittleMore = posts.filter(p => p.data.category === 'Just a Little More');
+const justALittleMore = posts.filter(p => p.data.category === 'Confluere');
 const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'How NOT to Write Your College Essays');
 ---
 <!doctype html>
@@ -73,7 +73,6 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
     <Header />
     <main>
       <section>
-
         <h2 class="category-head">💬 General</h2>
         <ul class="featured">
           {general.map((post) => (
@@ -88,8 +87,7 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
             </li>
           ))}
         </ul>
-
-        <h2 class="category-head">🏔️ Just a Little More</h2>
+        <h2 class="category-head">♾️ Confluere</h2>
         <ul>
           {justALittleMore.map((post) => (
             <li>
@@ -103,7 +101,6 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
             </li>
           ))}
         </ul>
-
         <h2 class="category-head">💣 How NOT to Write Your College Essays</h2>
         <ul>
           {howNOTToWriteYourCollegeEssays.map((post) => (
@@ -118,7 +115,6 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
             </li>
           ))}
         </ul>
-
 		    <h2 class="category-head">⚠️ Danger</h2>
         <ul>
           {danger.map((post) => (
@@ -133,7 +129,6 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
             </li>
           ))}
         </ul>
-
       </section>
     </main>
     <Footer />
