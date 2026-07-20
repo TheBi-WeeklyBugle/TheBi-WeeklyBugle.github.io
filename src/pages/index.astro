@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, CAROUSEL_INTERVAL, CAROUSEL_GAP } from '../consts';
 import { getCollection } from 'astro:content';
 
 const EXCLUDED_CATEGORIES = ['Danger', 'How NOT to Write Your College Essays'];
@@ -60,7 +60,7 @@ const filmPoster = "/images/WCD.png";
 
       <div class="film-section">
         <div class="carousel-header">
-          <span class="carousel-label">🎬 Film</span>
+          <span class="carousel-label">🎬 Woodchuck Day</span>
         </div>
         <a href="/film/watch" class="film-poster-link">
           <img src={filmPoster} alt="Film" />
@@ -94,7 +94,7 @@ const filmPoster = "/images/WCD.png";
   </body>
 </html>
 
-<script>
+<script define:vars={{ CAROUSEL_INTERVAL, CAROUSEL_GAP }}>
   function initCarousel() {
     const track = document.getElementById('carousel-track') as HTMLElement;
     const prev = document.getElementById('prev');
@@ -110,13 +110,13 @@ const filmPoster = "/images/WCD.png";
     function update() {
       const card = cards()[0] as HTMLElement;
       if (!card) return;
-      track.style.transform = `translateX(-${index * (card.offsetWidth + 16)}px)`;
+      track.style.transform = `translateX(-${index * (card.offsetWidth + CAROUSEL_GAP)}px)`;
     }
 
     function goNext() { index = index >= getMax() ? 0 : index + 1; update(); }
     function goPrev() { index = index <= 0 ? getMax() : index - 1; update(); }
 
-    function startTimer() { timer = setInterval(goNext, 4000); }
+    function startTimer() { timer = setInterval(goNext, CAROUSEL_INTERVAL); }
     function stopTimer() { clearInterval(timer); }
 
     prev?.addEventListener('click', () => { goPrev(); stopTimer(); startTimer(); });

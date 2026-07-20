@@ -9,15 +9,17 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 const posts = (await getCollection('blog', ({ data }) => {
   return data.draft !== true;
 })).sort((a, b) => {
-const dateDiff = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  const dateDiff = b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
   if (dateDiff !== 0) return dateDiff;
   return b.data.title.localeCompare(a.data.title);
 });
 
-const general = posts.filter(p => p.data.category === 'General');
-const danger = posts.filter(p => p.data.category === 'Danger');
-const justALittleMore = posts.filter(p => p.data.category === 'Confluere');
-const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'How NOT to Write Your College Essays');
+const getPostsByCategory = (category: string) => posts.filter(p => p.data.category === category);
+
+const general = getPostsByCategory('General');
+const confluere = getPostsByCategory('Confluere');
+const howNotToWrite = getPostsByCategory('How NOT to Write Your College Essays');
+const danger = getPostsByCategory('Danger');
 ---
 <!doctype html>
 <html lang="en">
@@ -89,7 +91,7 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
         </ul>
         <h2 class="category-head">♾️ Confluere</h2>
         <ul>
-          {justALittleMore.map((post) => (
+          {confluere.map((post) => (
             <li>
               <a href={`/blog/${post.id}/`}>
                 {post.data.heroImage && post.data.heroImage.length > 0 && (
@@ -103,7 +105,7 @@ const howNOTToWriteYourCollegeEssays = posts.filter(p => p.data.category === 'Ho
         </ul>
         <h2 class="category-head">💣 How NOT to Write Your College Essays</h2>
         <ul>
-          {howNOTToWriteYourCollegeEssays.map((post) => (
+          {howNotToWrite.map((post) => (
             <li>
               <a href={`/blog/${post.id}/`}>
                 {post.data.heroImage && post.data.heroImage.length > 0 && (
